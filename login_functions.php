@@ -12,7 +12,7 @@ function check_login_correct($user, $pass) {
   */
  
  
-  if ($user == 'admin' && $pass == 'password') { return true; }
+  if (strtolower($user) == 'admin' && $pass == 'password') { return true; }
   
   return false;
 }
