@@ -10,11 +10,7 @@ require('login_functions.php');
   
 //do security check
 check_logged_in();
-  
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,7 +20,7 @@ check_logged_in();
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title><?php if (isset($name)) { echo($name."-"); } ?>Rent</title>
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -36,6 +32,10 @@ check_logged_in();
 }
 
 </style>
+
+  <?php if (function_exists('sectionHead')){
+      sectionHead();
+    }?>
   </head>
 
   <body>
@@ -48,10 +48,10 @@ check_logged_in();
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item <?php if (isset($name) && ($name === "Home")) {?> active <?php } ?>">
+            <a class="nav-link" href="index.php">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?php if (isset($name) && ($name === "Apartments")) {?> active <?php } ?>">
             <a class="nav-link" href="apartments.php">Apartments</a>
           </li>
 		  <!--
