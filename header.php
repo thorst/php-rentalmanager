@@ -1,7 +1,4 @@
 <?php
-/*
-* FILE: secure_page.php
-*/
   
 session_start();
   
@@ -28,8 +25,8 @@ check_logged_in();
     <!-- Custom styles for this template -->
 	<style>
 	body {
-  padding-top: 5rem;
-}
+    padding-top: 5rem;
+  }
 
 </style>
 
