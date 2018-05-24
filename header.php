@@ -80,4 +80,4 @@ check_logged_in();
       </div>
     </nav>
 
-    <main role="main" class="container">
+    <main role="main" class="container-fluid">
