@@ -23,7 +23,7 @@ $("#mdlApartment").modal("show");
       $("#btSave").click(function(){
         var o ={
             Name:$("#txName").val(),
-            Address: "",
+            Address: "test",
             Zillow: ""
           };
         $.post( "api/apartment/save.php", function( o ) {
