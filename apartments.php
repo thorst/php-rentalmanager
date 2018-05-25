@@ -5,15 +5,16 @@
   // Define scripts section, below global scripts
   function sectionScripts(){?>
 
-    <!-- JSRender Template-->
+    <!-- JSRender Template{{:Name}} -->
     <script id="tmplApartments" type="text/x-jsrender">
-      <a href="#" class="list-group-item list-group-item-action">{{:Name}}</a>
+
+      <a href="#" class="list-group-item list-group-item-action"></a>
     </script>
 
 
     <script>
     $(function(){
-      $.post( "api/apartment/get.php", function(  ) {
+      $.post( "api/apartment/get.php", function(data  ) {
           $("#apartmentList").html($("#tmplApartments").render(data.apartments));
       });
 
@@ -26,7 +27,7 @@ $("#mdlApartment").modal("show");
             Address: "test",
             Zillow: ""
           };
-        $.post( "api/apartment/save.php", function( o ) {
+        $.post( "api/apartment/save.php",o.serialize(), function( data ) {
           $("#apartmentList").html($("#tmplApartments").render(data.apartments));
       });
 
