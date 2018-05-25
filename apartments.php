@@ -5,10 +5,10 @@
   // Define scripts section, below global scripts
   function sectionScripts(){?>
 
-    <!-- JSRender Template{{:Name}} -->
+    <!-- JSRender Template -->
     <script id="tmplApartments" type="text/x-jsrender">
 
-      <a href="#" class="list-group-item list-group-item-action"></a>
+      <a href="#" class="list-group-item list-group-item-action">{{:Name}}</a>
     </script>
 
 
@@ -18,9 +18,10 @@
           $("#apartmentList").html($("#tmplApartments").render(data.apartments));
       });
 
- $("#btAdd").click(function(){
-$("#mdlApartment").modal("show");
- });
+      $("#btAdd").click(function(){
+        $("#mdlApartment").modal("show");
+      });
+
       $("#btSave").click(function(){
         var o ={
             Name:$("#txName").val(),

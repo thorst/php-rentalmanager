@@ -1,5 +1,10 @@
 <?php
 
+    // Get common functions
+    require_once("../../app_config.php");
+    require_once(LIBRARY_PATH ."/db.php");
+    require_once(LIBRARY_PATH ."/apartments.php");
+
     // Initialize Vars
     $Name = "";
     $Address = "";
@@ -10,28 +15,29 @@
     $Address = isset($_POST['Address']) ? trim($_POST['Address']) : "";
     $Zillow = isset($_POST['Zillow']) ? trim($_POST['Zillow']) : "";
 
+    // Build apartment object
+    $appartment = new Apartment();
+    $appartment->Name = $Name;
+    $appartment->Address = $Address;
+    $appartment->Zillow = $Zillow;
+
     // Connect to db
-    $con = new mysqli('localhost', 'root', '', 'rent');
+    $con = db_connect($config);
 
-    // Did it connect
-    if ($con->connect_error) {
-        echo "Error: " . mysqli_connect_error();
-        exit();
-    }
+    // Save apartment
+    apartment_save($con,$appartment);
 
-    // TODO: This query isn't properly sanitized
-    $sql = "INSERT INTO apartment (Name, Address, Zillow)
-    VALUES ($Name, $Address, $Zillow)";
+    // Get apartments
+    $apartments = apartment_get($con);
 
-    echo $sql;
+    // Close db
+    db_close($con);
 
-    // Execute query
-    $con->query($sql);
+    // Build return object
+    $arr = array('successful' => true, 'error' => '', 'apartments' => $apartments);
 
-    // Close connection
-    $con->close();
-
-    // Return a list of apartments
-    include("get.php");
+    // Output
+    header('Content-Type: application/json');
+    echo json_encode($arr);
 
 ?>

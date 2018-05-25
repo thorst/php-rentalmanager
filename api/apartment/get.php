@@ -1,41 +1,24 @@
 <?php
 
-class Apartment
-{
-    public $Apartment_ID;
-    public $Name;
-    public $Address;
-    public $Zillow;
-    public $Added;
-}
+    // Get common functions
+    require_once("../../app_config.php");
+    require_once(LIBRARY_PATH ."/db.php");
+    require_once(LIBRARY_PATH ."/apartments.php");
 
-$con = @mysqli_connect('localhost', 'root', '', 'rent');
+    // Connect to db
+    $con = db_connect($config);
 
-if (!$con) {
-    echo "Error: " . mysqli_connect_error();
-	exit();
-}
+    // Get apartments
+    $apartments = apartment_get($con);
 
-$sql 	= 'SELECT * FROM apartment';
-$query 	= mysqli_query($con, $sql);
-$apartments = array();
-while ($row = mysqli_fetch_array($query))
-{
-    
-    $appartment = new Apartment();
-    $appartment->Name = $row['Name'];
+    // Close db
+    db_close($con);
 
-    $apartments[] = $apartment;
-}
+    // Build return object
+    $arr = array('successful' => true, 'error' => '', 'apartments' => $apartments);
 
-// Close connection
-mysqli_close ($con);
+    // Output
+    header('Content-Type: application/json');
+    echo json_encode($arr);
 
-
-
-
-$arr = array('successful' => true, 'error' => '', 'apartments' => $apartments);
-
-header('Content-Type: application/json');
-echo json_encode($arr);
 ?>
