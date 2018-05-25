@@ -29,20 +29,29 @@ function apartment_get ($con) {
 }
 
 function apartment_Save ($con, $apartment) {
-    // TODO: This query isn't properly sanitized
-    $sql = "INSERT INTO apartment (Apartment_ID, Name, Address, Zillow)
-    VALUES ('$apartment->Apartment_ID', '$apartment->Name', '$apartment->Address', '$apartment->Zillow') 
-    ON DUPLICATE KEY UPDATE 
-    Name='$apartment->Name', Address='$apartment->Address', Zillow='$apartment->Zillow'";
+    // Assume this will be doing an insert
+    $param = array($apartment->Name,$apartment->Address,$apartment->Zillow);
+    $sql = "INSERT INTO apartment (Name, Address, Zillow) VALUES (?, ?,?)";
 
-    //echo $sql;
-
-    // Execute query
-    $con->query($sql);
-
-
-    //$result = $db->exec("INSERT INTO table(firstname, lastname) VAULES('John', 'Doe')");
-   // $insertId = $db->lastInsertId();
+    // However, if they decide on doing an update alter the sql, and append the id
+    if ($apartment->Apartment_ID!="") {
+        $sql = "Update apartment SET Name=?, Address=?, Zillow=? WHERE Apartment_ID=?";
+        $param[] = $apartment->Apartment_ID;
+    }
+    
+    // Execute the sql
+    $stmt = $con->prepare($sql);
+    $stmt->execute($param);
+    
+    // Get how many rows were updated
+    //if ($stmt->rowCount()==1){}
+    
+    // Output errors
+    // $databaseErrors = $stmt->errorInfo();
+    // if( !empty($databaseErrors) ){  
+    //     $errorInfo = print_r($databaseErrors, true); # true flag returns val rather than print
+    //     $errorLogMsg = "error info: $errorInfo"; # do what you wish with this var, write to log file etc...         
+    // }
 }
 
 ?>

@@ -27,7 +27,9 @@ check_logged_in();
 	body {
     padding-top: 5rem;
   }
-
+  .btn-xs, .btn-group-xs > .btn {
+            line-height: .75;
+        }
 </style>
 
   <?php if (function_exists('sectionHead')){
