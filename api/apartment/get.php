@@ -36,5 +36,6 @@ mysqli_close ($con);
 
 $arr = array('successful' => true, 'error' => '', 'apartments' => $apartments);
 
+header('Content-Type: application/json');
 echo json_encode($arr);
 ?>

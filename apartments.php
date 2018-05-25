@@ -27,7 +27,7 @@ $("#mdlApartment").modal("show");
             Address: "test",
             Zillow: ""
           };
-        $.post( "api/apartment/save.php",o.serialize(), function( data ) {
+        $.post( "api/apartment/save.php",o, function( data ) {
           $("#apartmentList").html($("#tmplApartments").render(data.apartments));
       });
 

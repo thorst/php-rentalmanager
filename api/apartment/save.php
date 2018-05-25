@@ -5,7 +5,6 @@
     $Address = "";
     $Zillow = "";
 
-
     // Retrieve post data
     $Name = isset($_POST['Name']) ? trim($_POST['Name']) : "";
     $Address = isset($_POST['Address']) ? trim($_POST['Address']) : "";

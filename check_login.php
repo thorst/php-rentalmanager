@@ -6,7 +6,7 @@
 session_start();
   
 //include our login functions.
-require('login_functions.php');
+require('lib/login.php');
   
 //retrieve post data
 $user = trim($_POST['user']);

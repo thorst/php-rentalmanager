@@ -3,7 +3,7 @@
 session_start();
   
 //include our login functions.
-require('login_functions.php');
+require('lib/login.php');
   
 //do security check
 check_logged_in();
