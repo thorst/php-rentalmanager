@@ -1,9 +1,13 @@
 <?php
-
     // Get common functions
     require_once("../../app_config.php");
     require_once(LIBRARY_PATH ."/db.php");
     require_once(LIBRARY_PATH ."/apartments.php");
+    require_once(LIBRARY_PATH .'/login.php');
+
+    //do security check
+    session_start();
+    check_logged_in();
 
     // Connect to db
     $con = db_connect($config);

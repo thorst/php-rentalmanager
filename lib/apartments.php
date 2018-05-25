@@ -30,8 +30,10 @@ function apartment_get ($con) {
 
 function apartment_Save ($con, $apartment) {
     // TODO: This query isn't properly sanitized
-    $sql = "INSERT INTO apartment (Name, Address, Zillow)
-    VALUES ('$apartment->Name', '$apartment->Address', '$apartment->Zillow')";
+    $sql = "INSERT INTO apartment (Apartment_ID, Name, Address, Zillow)
+    VALUES ('$apartment->Apartment_ID', '$apartment->Name', '$apartment->Address', '$apartment->Zillow') 
+    ON DUPLICATE KEY UPDATE 
+    Name='$apartment->Name', Address='$apartment->Address', Zillow='$apartment->Zillow'";
 
     //echo $sql;
 
